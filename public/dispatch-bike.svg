@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 40" role="img" aria-label="Dispatch bike">
+  <g fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="29" r="7.5"/>
+    <circle cx="52" cy="29" r="7.5"/>
+  </g>
+  <circle cx="12" cy="29" r="2" fill="#1a1a1a"/><circle cx="52" cy="29" r="2" fill="#1a1a1a"/>
+  <!-- delivery box -->
+  <rect x="3" y="8" width="17" height="14" rx="2" fill="#ff6a00"/>
+  <path d="M3 13h17" stroke="#fff" stroke-width="1.5" opacity=".6"/>
+  <!-- body -->
+  <path d="M20 20h14l6-4h5l7 13" fill="none" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12 29l8-9" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M22 20c0-3 3-5 7-5h6l3 5z" fill="#ff6a00"/>
+  <path d="M27 20l4 9h8" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- handlebar + light -->
+  <path d="M45 16l-2-5h-4" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <circle cx="49" cy="15" r="2" fill="#ffc400"/>
+</svg>

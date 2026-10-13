@@ -1,0 +1,17 @@
+{
+  "name": "dispatchme",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --test tests/core.test.mjs"
+  },
+  "dependencies": {
+    "mapbox-gl": "^3.9.4",
+    "next": "15.5.27",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  }
+}
