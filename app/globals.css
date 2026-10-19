@@ -14,19 +14,7 @@
   --bad: #b42318;
   --bad-soft: #fee4e2;
   --radius: 14px;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #f2f4f7;
-    --ink-2: #a3acba;
-    --line: #2a3140;
-    --bg: #0e131c;
-    --card: #171d29;
-    --brand-soft: #3a2411;
-    --ok-soft: #10332a;
-    --warn-soft: #3a2a0c;
-    --bad-soft: #3b1714;
-  }
+  color-scheme: light; /* one light palette for rider, customer and admin */
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--ink); }
@@ -93,6 +81,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--brand); out
 .stars button { background: none; border: 0; font-size: 1.8rem; cursor: pointer; padding: 0 2px; color: var(--line); }
 .stars button.on, .stars .on { color: #f5a300; }
 .stars.ro span { font-size: 1rem; color: var(--line); }
+.switch:not(.on) { color: var(--ink-2) !important; }
 .switch { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; }
 .switch .track { width: 48px; height: 28px; border-radius: 99px; background: var(--line); position: relative; transition: .2s; }
 .switch .track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: .2s; }

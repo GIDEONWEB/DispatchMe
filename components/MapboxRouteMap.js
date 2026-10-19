@@ -46,7 +46,7 @@ export default function MapboxRouteMap({ pickup, dest, rider, path, onFail, edit
         mapboxgl.accessToken = MAPBOX_TOKEN;
         const map = new mapboxgl.Map({
           container: box.current,
-          style: "mapbox://styles/mapbox/streets-v12",
+          style: "mapbox://styles/mapbox/light-v11",
           center: ll(CITY.center),
           zoom: 11,
           attributionControl: true,
