@@ -41,7 +41,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
 .logo { font-weight: 800; font-size: 1.15rem; text-decoration: none; color: var(--ink); }
 .logo { display: inline-flex; align-items: center; gap: 8px; }
-.logo-bike { height: 28px; width: auto; display: block; }
 .logo b { color: var(--brand); }
 .content { flex: 1; padding: 16px 16px 96px; }
 .tabs { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--line); display: flex; justify-content: center; z-index: 6; }
@@ -126,3 +125,14 @@ th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); v
 .locbtn { flex: none; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); font-size: 1.15rem; line-height: 1; cursor: pointer; color: var(--ink); }
 .locbtn:hover:not(:disabled) { background: var(--brand-soft); }
 .locbtn:disabled { opacity: .45; cursor: default; }
+
+/* ---- Interactive map controls ---- */
+.svgmap .map { cursor: grab; user-select: none; -webkit-user-select: none; }
+.svgmap .map.grabbing { cursor: grabbing; }
+.svgmap .map { height: 320px; }
+.areadot { cursor: pointer; }
+.areadot:hover circle:nth-of-type(2) { opacity: .9; }
+.mapctl { position: absolute; left: 10px; bottom: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
+.mapctl button { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.2rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.mapctl button:hover:not(:disabled) { background: var(--brand-soft); }
+.mapctl button:disabled { opacity: .4; cursor: default; }

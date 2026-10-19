@@ -1,9 +1,10 @@
 "use client";
 import { cloneElement, isValidElement, useEffect, useId, useState } from "react";
 import Link from "next/link";
-import { LOCATIONS, STATUS, ACTIVE_STATUSES } from "@/lib/core";
+import { STATUS, ACTIVE_STATUSES } from "@/lib/core";
 import { mapsEnabled } from "@/lib/mapbox";
 import MapboxRouteMap from "@/components/MapboxRouteMap";
+import InteractiveSvgMap from "@/components/InteractiveSvgMap";
 
 export function useNow(ms = 1000) {
   const [now, setNow] = useState(() => Date.now());
@@ -14,12 +15,10 @@ export function useNow(ms = 1000) {
   return now;
 }
 
-export function Logo({ title }) {
+export function Logo() {
   return (
     <>
-      <img src="/dispatch-bike.svg" alt="" className="logo-bike" />
-      Dispatch<b>Me</b>
-      {title ? <span className="muted" style={{ fontWeight: 500 }}> · {title}</span> : null}
+      <span>Dispatch<b>Me</b></span>
     </>
   );
 }
@@ -89,16 +88,6 @@ export function Timeline({ status }) {
   );
 }
 
-/* Offline fallback map of Port Harcourt (SVG). Used when no Mapbox token is configured. */
-const LATS = LOCATIONS.map((l) => l.lat);
-const LNGS = LOCATIONS.map((l) => l.lng);
-const BOX = { minLat: Math.min(...LATS) - 0.03, maxLat: Math.max(...LATS) + 0.03, minLng: Math.min(...LNGS) - 0.03, maxLng: Math.max(...LNGS) + 0.03 };
-const W = 480, H = 320;
-const proj = (p) => ({
-  x: ((p.lng - BOX.minLng) / (BOX.maxLng - BOX.minLng)) * W,
-  y: H - ((p.lat - BOX.minLat) / (BOX.maxLat - BOX.minLat)) * H,
-});
-
 export function RouteMap({ pickup, dest, rider, path, editable, active, onPick, hint }) {
   const [failed, setFailed] = useState(false);
   useEffect(() => {
@@ -109,41 +98,7 @@ export function RouteMap({ pickup, dest, rider, path, editable, active, onPick, 
   if (mapsEnabled() && !failed)
     return <MapboxRouteMap pickup={pickup} dest={dest} rider={rider} path={path} onFail={() => setFailed(true)}
       editable={editable} active={active} onPick={onPick} hint={hint} />;
-  return <SvgMap pickup={pickup} dest={dest} rider={rider} />;
-}
-
-function SvgMap({ pickup, dest, rider }) {
-  const a = pickup && proj(pickup);
-  const b = dest && proj(dest);
-  const r = rider && proj(rider);
-  return (
-    <svg className="map" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Delivery map">
-      <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M40 0H0V40" fill="none" stroke="var(--line)" strokeWidth="1" />
-        </pattern>
-      </defs>
-      <rect width={W} height={H} fill="url(#grid)" />
-      {LOCATIONS.map((l) => {
-        const p = proj(l);
-        return (
-          <g key={l.id}>
-            <circle cx={p.x} cy={p.y} r="3" fill="var(--ink-2)" opacity=".4" />
-            <text x={p.x + 6} y={p.y + 3} fontSize="9" fill="var(--ink-2)" opacity=".8">{l.name}</text>
-          </g>
-        );
-      })}
-      {a && b && <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="var(--brand)" strokeWidth="3" strokeDasharray="6 5" />}
-      {a && <circle cx={a.x} cy={a.y} r="8" fill="var(--ok)" stroke="#fff" strokeWidth="2" />}
-      {b && <rect x={b.x - 8} y={b.y - 8} width="16" height="16" rx="3" fill="var(--bad)" stroke="#fff" strokeWidth="2" />}
-      {r && (
-        <g style={{ transition: "transform 1s linear" }} transform={`translate(${r.x} ${r.y})`}>
-          <circle r="15" fill="var(--ink)" />
-          <text textAnchor="middle" y="6" fontSize="17">🏍️</text>
-        </g>
-      )}
-    </svg>
-  );
+  return <InteractiveSvgMap pickup={pickup} dest={dest} rider={rider} />;
 }
 
 export function Field({ label, children, hint }) {

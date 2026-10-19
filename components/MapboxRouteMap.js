@@ -49,10 +49,11 @@ export default function MapboxRouteMap({ pickup, dest, rider, path, onFail, edit
           style: "mapbox://styles/mapbox/streets-v12",
           center: ll(CITY.center),
           zoom: 11,
-          cooperativeGestures: !editable, // a picker must pan with one finger
           attributionControl: true,
         });
         map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+        map.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: false }), "top-right");
+        map.addControl(new mapboxgl.FullscreenControl(), "top-right");
         map.on("error", (e) => {
           const s = e?.error?.status;
           if (s === 401 || s === 403) { markMapsFailed(); onFail?.(); }
@@ -150,9 +151,18 @@ export default function MapboxRouteMap({ pickup, dest, rider, path, onFail, edit
     if (g.current.map) move(); else { const prev = g.current.ready; g.current.ready = () => { prev?.(); move(); }; }
   }, [rider?.lat, rider?.lng]);
 
+  const recenter = () => {
+    const { map, mapboxgl } = g.current;
+    if (!map) return;
+    const b = new mapboxgl.LngLatBounds();
+    [pickup, dest, rider].filter(Boolean).forEach((p) => b.extend(ll(p)));
+    if (!b.isEmpty()) map.fitBounds(b, { padding: 64, maxZoom: 16, duration: 600 });
+  };
+
   return (
     <div className="mapwrap">
       <div ref={box} className={"map gmap" + (editable ? " picker" : "")} role="region" aria-label={editable ? "Pick pickup and drop-off on the map" : "Delivery map"} />
+      <div className="mapctl"><button type="button" onClick={recenter} aria-label="Re-centre on route" title="Re-centre">⌖</button></div>
       {editable && hint && <div className="maphint" aria-live="polite">{hint}</div>}
     </div>
   );
