@@ -1,12 +1,14 @@
 :root {
-  --ink: #101828;
+  --ink: #0f172a;
   --ink-2: #475467;
-  --line: #e4e0d8;
-  --bg: #f6f4ef;
+  --line: #e1e7f0;
+  --bg: #f7f9fd;
   --card: #ffffff;
-  --brand: #ff6a00;
-  --brand-dark: #d95a00;
-  --brand-soft: #fff0e3;
+  --brand: #2563eb;      /* Dispatch Me blue */
+  --brand-dark: #1d4ed8;
+  --brand-soft: #e8f0ff;
+  --accent: #ff4d29;     /* Dispatch Me orange */
+  --accent-soft: #ffece7;
   --ok: #12805c;
   --ok-soft: #e0f5ec;
   --warn: #b54708;
@@ -29,7 +31,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
 .logo { font-weight: 800; font-size: 1.15rem; text-decoration: none; color: var(--ink); }
 .logo { display: inline-flex; align-items: center; gap: 8px; }
-.logo b { color: var(--brand); }
+.logo b { color: var(--accent); }
+.logo img { height: 34px; width: auto; display: block; }
 .content { flex: 1; padding: 16px 16px 96px; }
 .tabs { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--line); display: flex; justify-content: center; z-index: 6; }
 .tabs-inner { width: 100%; max-width: 520px; display: flex; }

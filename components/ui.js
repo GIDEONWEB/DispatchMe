@@ -17,9 +17,8 @@ export function useNow(ms = 1000) {
 
 export function Logo() {
   return (
-    <>
-      <span>Dispatch<b>Me</b></span>
-    </>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/logo.png" alt="Dispatch Me" />
   );
 }
 
